@@ -1,0 +1,495 @@
+:root {
+  color-scheme: dark;
+  --bg-deep: #060911;
+  --bg-card: #101624;
+  --bg-pill: rgba(14, 20, 34, 0.82);
+  --border-subtle: rgba(148, 163, 184, 0.14);
+  --border-glow: rgba(56, 189, 248, 0.48);
+  --text-primary: #f1f5f9;
+  --text-muted: #64748b;
+  --accent-cyan: #38bdf8;
+  --accent-indigo: #818cf8;
+  --accent-emerald: #34d399;
+  --radius-card: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-block-size: 100dvh;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  overflow-x: clip;
+}
+
+/* Replaced elements use block display to avoid inline baseline gaps */
+iframe,
+svg {
+  display: block;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+/* ==================== AMBIENT DARK MODE SCENE ==================== */
+.ambient-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: clip;
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.85), transparent 78%);
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.42;
+  will-change: transform;
+  animation: floatOrb 16s ease-in-out infinite alternate;
+}
+
+.orb-cyan {
+  inline-size: 420px;
+  block-size: 420px;
+  inset-block-start: calc(50% - 240px);
+  inset-inline-start: calc(50% - 340px);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.45), transparent 70%);
+}
+
+.orb-indigo {
+  inline-size: 460px;
+  block-size: 460px;
+  inset-block-start: calc(50% - 210px);
+  inset-inline-start: calc(50% - 80px);
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.42), transparent 70%);
+  animation-duration: 20s;
+  animation-delay: -5s;
+}
+
+.orb-emerald {
+  inline-size: 340px;
+  block-size: 340px;
+  inset-block-start: calc(50% - 100px);
+  inset-inline-start: calc(50% - 170px);
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.25), transparent 70%);
+  animation-duration: 18s;
+  animation-delay: -9s;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate3d(-24px, -18px, 0) scale(0.96);
+  }
+  50% {
+    transform: translate3d(22px, 14px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-12px, 24px, 0) scale(0.98);
+  }
+}
+
+/* ==================== APP SHELL & SEARCH STAGE ==================== */
+.app-shell {
+  position: relative;
+  z-index: 1;
+  min-block-size: 100dvh;
+  display: flex;
+  flex-direction: column;
+  inline-size: min(1600px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.search-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  transition:
+    min-block-size 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    padding-block 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* FRAME 1: Ban đầu chưa hiển thị dự án, thanh tìm kiếm nằm giữa màn hình */
+.app-shell.is-initial .search-stage {
+  min-block-size: 100dvh;
+  padding-block: 2rem;
+}
+
+/* FRAME 2: Sau khi nhấn Enter, thanh tìm kiếm trượt gọn lên trên */
+.app-shell.has-searched .search-stage {
+  min-block-size: 0;
+  padding-block: 1.65rem 1.35rem;
+}
+
+.search-form {
+  inline-size: min(640px, 100%);
+}
+
+.search-FieldWrap {
+  position: relative;
+  border-radius: 999px;
+  padding: 1.5px;
+  background: linear-gradient(
+    120deg,
+    rgba(56, 189, 248, 0.55),
+    rgba(129, 140, 248, 0.35),
+    rgba(52, 211, 153, 0.45),
+    rgba(56, 189, 248, 0.55)
+  );
+  background-size: 240% 240%;
+  animation: shimmerBorder 7s ease infinite;
+  box-shadow:
+    0 20px 50px -12px rgba(2, 6, 23, 0.85),
+    0 0 36px -6px rgba(56, 189, 248, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-FieldWrap:focus-within {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 24px 60px -12px rgba(2, 6, 23, 0.92),
+    0 0 48px -4px rgba(56, 189, 248, 0.36);
+}
+
+.search-glow {
+  position: absolute;
+  inset: -14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.22), rgba(129, 140, 248, 0.22));
+  filter: blur(22px);
+  opacity: 0.75;
+  z-index: -1;
+  pointer-events: none;
+  animation: pulseGlow 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes shimmerBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+  from { opacity: 0.45; transform: scale(0.98); }
+  to { opacity: 0.85; transform: scale(1.02); }
+}
+
+.search-pill {
+  display: flex;
+  align-items: safe center;
+  gap: 0.85rem;
+  padding-block: 0.85rem;
+  padding-inline: 1.35rem 1.15rem;
+  border-radius: 999px;
+  background: var(--bg-pill);
+  backdrop-filter: blur(20px);
+}
+
+.search-icon {
+  inline-size: 20px;
+  block-size: 20px;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  min-inline-size: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.enter-kbd {
+  flex-shrink: 0;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.65);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  user-select: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.search-FieldWrap:focus-within .enter-kbd {
+  color: var(--accent-cyan);
+  border-color: rgba(56, 189, 248, 0.38);
+}
+
+/* ==================== RESULTS & 2-COLUMN LARGE CARD GRID ==================== */
+.results-section {
+  flex: 1;
+  padding-block-end: 3.5rem;
+  animation: revealGrid 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.results-section[hidden] {
+  display: none;
+}
+
+@keyframes revealGrid {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cards-grid {
+  display: grid;
+  /* Khung 2 Card lớn trên 1 hàng ở màn hình rộng */
+  grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr));
+  gap: 1.75rem;
+}
+
+/* Container query wrapper per size-aware-styling guide */
+.card-container {
+  container: project-card / inline-size;
+  container-type: inline-size;
+  grid-row: span 2;
+  display: grid;
+  /* Same-cascade fallback before subgrid */
+  grid-template-rows: 1fr auto;
+  grid-template-rows: subgrid;
+}
+
+.project-card {
+  grid-row: span 2;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-rows: subgrid;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  overflow: clip;
+  box-shadow: 0 22px 48px -14px rgba(0, 0, 0, 0.78);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 26px 56px -12px rgba(2, 8, 24, 0.9);
+}
+
+/* Vùng tương tác iframe chiếm trọn diện tích, KHÔNG có bất kỳ nút/nhãn nào đè lên */
+.card-preview-shell {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 1100 / 720;
+  background: #090d16;
+  overflow: clip;
+}
+
+.card-iframe-scaler {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 1100px;
+  block-size: 720px;
+  transform-origin: top left;
+  transform: scale(var(--iframe-scale, 0.55));
+}
+
+.card-iframe {
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+  background: #0b111e;
+}
+
+/* Chân thẻ tối giản: Chỉ có Tên dự án + nút nhỏ Phóng to */
+.card-footer {
+  padding: 0.8rem 1.15rem;
+  border-block-start: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(13, 19, 31, 0.92);
+}
+
+@media (min-width: 520px) {
+  .card-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@supports (container-type: inline-size) {
+  @media (min-width: 520px) {
+    .card-footer {
+      flex-direction: column;
+    }
+  }
+
+  @container project-card (min-width: 340px) {
+    .card-footer {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  min-inline-size: 0;
+  overflow: clip;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expand-btn {
+  flex-shrink: 0;
+  padding: 0.38rem 0.78rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(30, 41, 59, 0.65);
+  color: #bae6fd;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.expand-btn:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.16);
+}
+
+/* ==================== EMPTY STATE ==================== */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-card);
+  background: rgba(16, 22, 36, 0.55);
+}
+
+.empty-state kbd {
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(30, 41, 59, 0.7);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+}
+
+/* ==================== FULLSCREEN VIEWER DIALOG (FRAME 3) ==================== */
+.viewer-dialog {
+  inline-size: min(1480px, 96vw);
+  block-size: min(92dvh, 980px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.88);
+  overflow: clip;
+}
+
+.viewer-dialog::backdrop {
+  background: rgba(3, 6, 14, 0.84);
+  backdrop-filter: blur(8px);
+}
+
+.viewer-shell {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+}
+
+.viewer-bar {
+  display: flex;
+  align-items: safe center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 1rem;
+  background: #0c121e;
+  border-block-end: 1px solid var(--border-subtle);
+}
+
+.viewer-title {
+  font-size: 0.96rem;
+  min-inline-size: 0;
+  overflow: clip;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viewer-btn {
+  padding: 0.38rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(30, 41, 59, 0.7);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.viewer-btn-accent {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.14);
+  color: #bae6fd;
+}
+
+.viewer-stage {
+  flex: 1;
+  min-block-size: 0;
+  background: #070a12;
+}
+
+.viewer-iframe {
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-orb,
+  .search-FieldWrap,
+  .search-glow {
+    animation: none;
+  }
+}

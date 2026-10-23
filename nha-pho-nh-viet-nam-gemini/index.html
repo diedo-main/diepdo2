@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đồng Quê Việt Nam - Ngày &amp; Đêm | Pure CSS Art</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Hidden checkbox controlling Day / Night state (Pure CSS) -->
+  <input type="checkbox" id="day-night" class="state-checkbox" aria-label="Chuyển đổi Ngày và Đêm">
+
+  <!-- Ambient Viewport Background -->
+  <div class="viewport-bg">
+    <div class="ambient-glow"></div>
+  </div>
+
+  <!-- Top Controls: Day/Night Switch -->
+  <header class="hud">
+    <div class="title-badge">
+      <span class="title-sub">PURE HTML &amp; CSS DIORAMA</span>
+      <h1 class="title-main">Đồng Quê Việt Nam</h1>
+    </div>
+
+    <label for="day-night" class="toggle-switch" title="Nhấn để đổi Ngày / Đêm">
+      <span class="toggle-track">
+        <span class="track-stars">
+          <i></i><i></i><i></i><i></i><i></i>
+        </span>
+        <span class="track-clouds">
+          <i></i><i></i>
+        </span>
+        <span class="toggle-thumb">
+          <span class="sun-face"></span>
+          <span class="moon-face">
+            <i></i><i></i><i></i>
+          </span>
+        </span>
+      </span>
+      <span class="toggle-labels">
+        <span class="label-day">Ban Ngày</span>
+        <span class="label-night">Ban Đêm</span>
+      </span>
+    </label>
+  </header>
+
+  <!-- Main Isometric / Layered Cutout Scene -->
+  <main class="stage">
+    <div class="diorama">
+      <!-- Outer decorative frame shadow & geometric cutout -->
+      <div class="scene-canvas">
+
+        <!-- ==================== 1. SKY & CELESTIAL ==================== -->
+        <div class="sky">
+          <!-- Night Stars & Shooting Star -->
+          <div class="stars">
+            <i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i>
+            <i class="s5"></i><i class="s6"></i><i class="s7"></i><i class="s8"></i>
+            <i class="s9"></i><i class="s10"></i><i class="s11"></i><i class="s12"></i>
+            <i class="s13"></i><i class="s14"></i><i class="s15"></i><i class="s16"></i>
+            <i class="s17"></i><i class="s18"></i><i class="s19"></i><i class="s20"></i>
+            <i class="s21"></i><i class="s22"></i><i class="s23"></i><i class="s24"></i>
+            <span class="shooting-star"></span>
+          </div>
+
+          <!-- Rotating Celestial Wheel (Sun & Moon) -->
+          <div class="celestial-orbit">
+            <div class="sun">
+              <div class="sun-halo"></div>
+              <div class="sun-core"></div>
+            </div>
+            <div class="moon">
+              <div class="moon-halo"></div>
+              <div class="moon-core">
+                <span class="crater c1"></span>
+                <span class="crater c2"></span>
+                <span class="crater c3"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drifting Stylized Clouds -->
+          <div class="clouds">
+            <div class="cloud cloud-1"><span></span><span></span><span></span></div>
+            <div class="cloud cloud-2"><span></span><span></span></div>
+            <div class="cloud cloud-3"><span></span><span></span><span></span></div>
+            <div class="cloud cloud-4"><span></span><span></span></div>
+          </div>
+
+          <!-- Flying White Storks (Đàn cò trắng) -->
+          <div class="stork-flock">
+            <div class="stork stork-1"><i class="wing-l"></i><i class="body"></i><i class="wing-r"></i></div>
+            <div class="stork stork-2"><i class="wing-l"></i><i class="body"></i><i class="wing-r"></i></div>
+            <div class="stork stork-3"><i class="wing-l"></i><i class="body"></i><i class="wing-r"></i></div>
+            <div class="stork stork-4"><i class="wing-l"></i><i class="body"></i><i class="wing-r"></i></div>
+            <div class="stork stork-5"><i class="wing-l"></i><i class="body"></i><i class="wing-r"></i></div>
+          </div>
+        </div>
+
+        <!-- ==================== 2. LIMESTONE KARST MOUNTAINS ==================== -->
+        <div class="mountains">
+          <div class="karst karst-far-1"></div>
+          <div class="karst karst-far-2"></div>
+          <div class="mist mist-1"></div>
+
+          <div class="karst karst-mid-1">
+            <span class="facet-light"></span>
+            <span class="facet-dark"></span>
+          </div>
+          <div class="karst karst-mid-2">
+            <span class="facet-light"></span>
+            <span class="facet-dark"></span>
+          </div>
+          <div class="karst karst-mid-3">
+            <span class="facet-light"></span>
+            <span class="facet-dark"></span>
+          </div>
+          <div class="mist mist-2"></div>
+        </div>
+
+        <!-- ==================== 3. DISTANT HILLS & RICE TERRACES ==================== -->
+        <div class="terraces">
+          <!-- Back Rolling Hill -->
+          <div class="hill hill-back"></div>
+
+          <!-- Distant Village Pagoda / Tower Silhouette -->
+          <div class="distant-pagoda">
+            <span class="tier t1"></span>
+            <span class="tier t2"></span>
+            <span class="tier t3"></span>
+            <span class="spire"></span>
+          </div>
+
+          <!-- Terraced Rice Paddies (Ruộng bậc thang & Đồng lúa) -->
+          <div class="terrace-layer t-layer-1">
+            <div class="paddy-water"></div>
+          </div>
+          <div class="terrace-layer t-layer-2">
+            <div class="paddy-water"></div>
+          </div>
+          <div class="terrace-layer t-layer-3"></div>
+        </div>
+
+        <!-- ==================== 4. WINDING RIVER & SAMPAN BOAT ==================== -->
+        <div class="river-system">
+          <div class="river-bed">
+            <!-- Water Shimmer & Celestial Reflection -->
+            <div class="water-reflections">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+
+            <!-- Lotus Leaves & Flowers on River Margin -->
+            <div class="lotus-patch">
+              <span class="lily-pad lp-1"></span>
+              <span class="lily-pad lp-2"></span>
+              <span class="lily-pad lp-3"></span>
+              <span class="lotus-flower lf-1"></span>
+              <span class="lotus-flower lf-2"></span>
+            </div>
+
+            <!-- Drifting Wooden Sampan Boat (Thuyền nan) -->
+            <div class="sampan-boat">
+              <div class="boat-wake"></div>
+              <div class="boat-reflection"></div>
+              <div class="boat-lantern-glow"></div>
+              <div class="boat-hull"></div>
+              <div class="boat-canopy"></div>
+              <div class="boat-rower">
+                <span class="rower-body"></span>
+                <span class="non-la"></span>
+                <span class="oar"></span>
+              </div>
+              <div class="boat-lantern"></div>
+            </div>
+          </div>
+
+          <!-- Rustic Bamboo Bridge (Cầu tre) -->
+          <div class="bamboo-bridge">
+            <div class="bridge-posts">
+              <i></i><i></i><i></i><i></i>
+            </div>
+            <div class="bridge-deck"></div>
+            <div class="bridge-rail"></div>
+          </div>
+        </div>
+
+        <!-- ==================== 5. VILLAGE COMPOUND (NHÀ BA GIAN) ==================== -->
+        <div class="village-ground">
+          <!-- Left Bank / Rice Field Foreground -->
+          <div class="meadow-left">
+            <!-- Swaying Rice Stalk Clusters -->
+            <div class="rice-cluster rc-1"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="rice-cluster rc-2"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="rice-cluster rc-3"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="rice-cluster rc-4"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+
+          <!-- Right Mound / Village Courtyard -->
+          <div class="village-mound">
+            <!-- Brick Courtyard (Sân gạch đỏ) -->
+            <div class="courtyard">
+              <!-- Cast Light Cones at Night (Josetxu / Paul Blow signature effect) -->
+              <div class="night-light-cast cast-door"></div>
+              <div class="night-light-cast cast-win-1"></div>
+              <div class="night-light-cast cast-win-2"></div>
+              <div class="night-light-cast cast-kitchen"></div>
+            </div>
+
+            <!-- Background Banana Trees behind House (Bụi chuối) -->
+            <div class="banana-grove">
+              <div class="banana-tree bt-1">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="leaf l4"></span>
+              </div>
+              <div class="banana-tree bt-2">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+              </div>
+            </div>
+
+            <!-- Traditional 3-Bay House (Nhà ba gian mái ngói) -->
+            <div class="viet-house">
+              <!-- House Drop Shadow -->
+              <div class="house-shadow"></div>
+
+              <!-- Side Kitchen Annex (Nhà bếp mái tranh + Khói bếp) -->
+              <div class="kitchen-annex">
+                <!-- Rising Kitchen Smoke (Khói lam chiều) -->
+                <div class="chimney-smoke">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <div class="kitchen-wall-front">
+                  <div class="kitchen-window"></div>
+                </div>
+                <div class="kitchen-wall-side"></div>
+                <div class="kitchen-roof"></div>
+              </div>
+
+              <!-- Main House Body (Pseudo-3D Isometric Faces) -->
+              <div class="house-body">
+                <!-- Front Wall (Tường mặt trước) -->
+                <div class="wall-front">
+                  <div class="veranda-pillars">
+                    <i></i><i></i><i></i><i></i>
+                  </div>
+                  <!-- 3 Bays: Left Window, Center Wooden Door, Right Window -->
+                  <div class="window win-left">
+                    <span class="win-frame"></span>
+                  </div>
+                  <div class="main-door">
+                    <span class="door-panel"></span>
+                    <span class="door-step"></span>
+                  </div>
+                  <div class="window win-right">
+                    <span class="win-frame"></span>
+                  </div>
+                  <!-- Hanging Porch Light (Đèn hiên nhà) -->
+                  <div class="porch-lamp">
+                    <span class="lamp-cord"></span>
+                    <span class="lamp-bulb"></span>
+                    <span class="lamp-halo"></span>
+                  </div>
+                </div>
+
+                <!-- Right Gable Side Wall (Tường hồi) -->
+                <div class="wall-side">
+                  <div class="gable-vent"></div>
+                  <div class="water-jar">
+                    <span class="jar-lid"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Traditional Curved Red Tile Roof (Mái ngói mũi hài & Đầu đao) -->
+              <div class="house-roof">
+                <div class="roof-ridge">
+                  <span class="ridge-horn horn-left"></span>
+                  <span class="ridge-horn horn-right"></span>
+                </div>
+                <div class="roof-slope-front">
+                  <div class="tile-pattern"></div>
+                </div>
+                <div class="roof-slope-side"></div>
+              </div>
+            </div>
+
+            <!-- Golden Haystack (Cây rơm vàng) -->
+            <div class="haystack">
+              <div class="hay-shadow"></div>
+              <div class="hay-pole"></div>
+              <div class="hay-body">
+                <span class="hay-layer hl-1"></span>
+                <span class="hay-layer hl-2"></span>
+                <span class="hay-layer hl-3"></span>
+              </div>
+            </div>
+
+            <!-- Bamboo Grove (Lũy tre làng) -->
+            <div class="bamboo-grove">
+              <div class="bamboo-stalk bs-1">
+                <span class="leaves lv-1"></span>
+                <span class="leaves lv-2"></span>
+                <span class="leaves lv-3"></span>
+              </div>
+              <div class="bamboo-stalk bs-2">
+                <span class="leaves lv-1"></span>
+                <span class="leaves lv-2"></span>
+                <span class="leaves lv-3"></span>
+              </div>
+              <div class="bamboo-stalk bs-3">
+                <span class="leaves lv-1"></span>
+                <span class="leaves lv-2"></span>
+              </div>
+              <div class="bamboo-stalk bs-4">
+                <span class="leaves lv-1"></span>
+                <span class="leaves lv-2"></span>
+              </div>
+              <div class="bamboo-stalk bs-5">
+                <span class="leaves lv-1"></span>
+                <span class="leaves lv-2"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==================== 6. FOREGROUND DYKE & WATER BUFFALO ==================== -->
+          <div class="foreground-dyke">
+            <div class="dyke-path"></div>
+
+            <!-- Grazing Water Buffalo (Con trâu bên bờ đê) -->
+            <div class="water-buffalo">
+              <div class="buffalo-shadow"></div>
+              <div class="buffalo-legs">
+                <i class="leg-bl"></i>
+                <i class="leg-br"></i>
+                <i class="leg-fl"></i>
+                <i class="leg-fr"></i>
+              </div>
+              <div class="buffalo-body"></div>
+              <div class="buffalo-tail"></div>
+              <div class="buffalo-neck-head">
+                <div class="buffalo-horns">
+                  <i class="horn-l"></i>
+                  <i class="horn-r"></i>
+                </div>
+                <div class="buffalo-head">
+                  <i class="ear"></i>
+                  <i class="eye"></i>
+                  <i class="muzzle"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Foreground Grass & Wildflowers -->
+            <div class="fg-foliage">
+              <span class="bush b1"></span>
+              <span class="bush b2"></span>
+              <span class="bush b3"></span>
+              <div class="rice-cluster rc-fg-1"><i></i><i></i><i></i><i></i></div>
+              <div class="rice-cluster rc-fg-2"><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 7. NIGHTTIME FIREFLIES (ĐOM ĐÓM) ==================== -->
+        <div class="fireflies">
+          <i class="ff-1"></i><i class="ff-2"></i><i class="ff-3"></i><i class="ff-4"></i>
+          <i class="ff-5"></i><i class="ff-6"></i><i class="ff-7"></i><i class="ff-8"></i>
+          <i class="ff-9"></i><i class="ff-10"></i><i class="ff-11"></i><i class="ff-12"></i>
+          <i class="ff-13"></i><i class="ff-14"></i><i class="ff-15"></i><i class="ff-16"></i>
+        </div>
+
+        <!-- ==================== 8. ISOMETRIC DIORAMA EARTH CROSS-SECTION ==================== -->
+        <div class="diorama-Rim"></div>
+      </div>
+
+      <!-- 3D Cutout Base / Earth Slice Pedestal -->
+      <div class="diorama-base">
+        <div class="base-face-left">
+          <span class="soil-stratum st-1"></span>
+          <span class="soil-stratum st-2"></span>
+        </div>
+        <div class="base-face-right">
+          <span class="soil-stratum st-1"></span>
+          <span class="soil-stratum st-2"></span>
+          <span class="river-slice"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="caption">
+    <span>Lấy cảm hứng từ <strong>Josetxu</strong> &bull; 100% Pure HTML &amp; CSS (Không JS / Không SVG / Không Ảnh)</span>
+  </footer>
+</body>
+</html>
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Showcase</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Hào quang nền nhẹ nhàng trong chế độ Dark Mode -->
+  <div class="ambient-scene" aria-hidden="true">
+    <div class="aurora-orb orb-cyan"></div>
+    <div class="aurora-orb orb-indigo"></div>
+    <div class="aurora-orb orb-emerald"></div>
+    <div class="ambient-grid"></div>
+  </div>
+
+  <main id="app-shell" class="app-shell is-initial">
+    <!-- Khu vực Thanh Tìm Kiếm (Ban đầu nằm giữa màn hình, nhấn Enter trượt mượt lên trên) -->
+    <section class="search-stage" aria-label="Tìm kiếm dự án">
+      <form id="search-form" class="search-form" role="search">
+        <div class="search-FieldWrap">
+          <span class="search-glow" aria-hidden="true"></span>
+          <div class="search-pill">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M10.5 3a7.5 7.5 0 015.96 12.06l4.24 4.24a1 1 0 01-1.42 1.42l-4.24-4.24A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"
+                fill="currentColor"
+              />
+            </svg>
+            <input
+              type="text"
+              id="search-input"
+              class="search-input"
+              placeholder="Nhập từ khoá tìm kiếm... (Để trống + nhấn Enter để hiện tất cả)"
+              aria-label="Nhập từ khoá tìm kiếm dự án"
+              autocomplete="off"
+              autofocus
+            >
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Khu vực hiển thị Lưới 2 Card lớn (Chỉ hiện sau khi nhấn Enter) -->
+    <section id="results-section" class="results-section" hidden aria-live="polite">
+      <div id="cards-grid" class="cards-grid"></div>
+
+      <div id="empty-state" class="empty-state" hidden>
+        <p>Không tìm thấy dự án nào khớp với từ khoá này. Hãy xoá trắng ô tìm kiếm và nhấn <kbd>Enter ↵</kbd> để xem tất cả.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Khung xem Phóng to toàn màn hình 1 dự án (FRAME 3) -->
+  <dialog id="viewer-dialog" class="viewer-dialog">
+    <div class="viewer-shell">
+      <header class="viewer-bar">
+        <button type="button" id="btn-close-viewer" class="viewer-btn">
+          ← Quay lại
+        </button>
+        <strong id="viewer-title" class="viewer-title"></strong>
+        <a id="viewer-open-tab" class="viewer-btn viewer-btn-accent" href="#" target="_blank" rel="noopener">
+          Mở tab mới ↗
+        </a>
+      </header>
+      <div class="viewer-stage">
+        <iframe id="viewer-iframe" class="viewer-iframe" title="Xem phóng to dự án" src="about:blank"></iframe>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="projects.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

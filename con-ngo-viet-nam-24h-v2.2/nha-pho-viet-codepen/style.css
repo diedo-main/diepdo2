@@ -1,0 +1,258 @@
+/* Vietnamese three-storey house diorama — original CSS illustration.
+   CodePen settings: plain CSS, no external stylesheets or preprocessors. */
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+  margin: 0;
+  background: #f5f2e9;
+  color: #384843;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+.village-app {
+  min-height: 100svh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; padding: 22px 14px 14px;
+}
+.time-topbar {
+  width:min(1100px,100%);margin:0 0 14px;padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  border:1px solid #d8ded4;border-radius:18px;background:#fffdf6;
+  box-shadow:0 9px 28px #4d635710;
+}
+.time-topbar-copy{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.time-topbar-eyebrow{margin:0;font-size:10px;font-weight:900;letter-spacing:.19em;color:#8a9386;}
+.time-topbar h2{margin:0;font-family:Georgia,serif;font-size:25px;line-height:1.2;color:#345b56;font-weight:400;}
+.time-topbar-desc{margin:0;font-size:13px;color:#697a70;line-height:1.45;}
+.time-input-wrap{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:700;color:#536e64;}
+.time-input-wrap input{appearance:none;-webkit-appearance:none;border:1px solid #d6ddd5;border-radius:12px;padding:12px 14px;background:#f8faf6;color:#345b56;font:800 18px 'Trebuchet MS',Arial,sans-serif;min-width:144px;}
+.time-input-wrap input:focus-visible{outline:3px solid #84a5a0;outline-offset:3px;}
+.scene {
+  --ink: #3f5d5b;
+  --facade: #f3dfc1;
+  --facade-shade: #e2c6a5;
+  --night-light: #bededa;
+  --leaf: #548c66;
+  --leaf-light: #86ae7a;
+  --leaf-deep: #396f58;
+  --soil: #c8b89b;
+  --night-opacity: 0;
+  --warmth-opacity: 0;
+  isolation: isolate;
+  position: relative; width: min(1100px,100%); aspect-ratio: 1100/720;
+  overflow: hidden; border-radius: 22px; container-type: inline-size;
+  background: linear-gradient(180deg, #8fc5da 0%, #c2e2e0 43%, #f6dcc2 78%, #f7dcc6 100%);
+  box-shadow: 0 24px 70px rgba(60, 69, 63, .13), 0 3px 13px #60472f12;
+  transition: background 1.5s ease;
+}
+.scene::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg,#111d3c 0%,#243452 47%,#65596a 82%,#8c777b 100%);
+  opacity: var(--night-opacity); transition: opacity 1.5s ease;
+}
+.sky-warmth {
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,#f1a27a98 0%,#f4bb9560 46%,#d779587d 100%);
+  opacity:var(--warmth-opacity);transition:opacity 1.5s ease;
+}
+.scene::after {
+  content: ''; pointer-events: none; position: absolute; inset: 0; z-index: 30;
+  background: linear-gradient(180deg, #ffffff10, transparent 42%, #9e754018);
+}
+/* Sky and atmosphere */
+.sky-objects { position: absolute; inset: 0; overflow: hidden; }
+.sun, .moon { position: absolute; left: 79%; top: 14%; width: 9%; aspect-ratio: 1; border-radius: 50%; transition: opacity 1s, transform 1.6s, left 1.6s, top 1.6s; }
+.sun { background: #fff4c6; box-shadow: 0 0 0 17px #fff2c323, 0 0 0 48px #fff3ca12, 0 0 90px 20px #ffefbf9c; }
+.moon { opacity: 0; transform: translateY(45px); background: #f5eec9; box-shadow: 0 0 22px 6px #f1e6c95c, 0 0 70px 10px #deceaa2e; }
+.moon::after { content: ''; display: block; position: absolute; width: 76%; height: 76%; top: -2%; left: 34%; background: #203352; border-radius: 50%; }
+.stars { opacity: 0; transition: opacity 1.6s; }
+.stars i { position: absolute; width: .38%; aspect-ratio: 1; left: var(--x); top: var(--y); border-radius: 50%; background: #fff9db; box-shadow: 0 0 10px #f8f0c9; animation: twinkle 2.5s ease-in-out var(--d) infinite alternate; }
+@keyframes twinkle { from {opacity:.35;transform:scale(.5)} to {opacity:1;transform:scale(1.3)} }
+.cloud { position: absolute; width: 14%; height: 5%; border-radius: 100px; background: #ffffffaa; filter: blur(.3px); animation: float-cloud 18s ease-in-out infinite alternate; transition: opacity 1s; }
+.cloud::before, .cloud::after { content: ''; position: absolute; border-radius: 100%; background: inherit; }
+.cloud::before {width: 49%;height: 165%;left: 18%;bottom: 10%;} .cloud::after {width: 45%;height: 130%;right: 11%;bottom: 9%;}
+.cloud-one {top: 22%;left: 12%;} .cloud-two {top: 12%;left: 48%;width: 10%;opacity:.65;animation-delay:-6s;} .cloud-three {top: 33%;left: 84%;width: 8%;opacity:.47;animation-delay:-9s;}
+@keyframes float-cloud {from{transform:translateX(-10px)}to{transform:translateX(22px)}}
+.distant-hill { position: absolute; z-index: 1; bottom: 17%; width: 63%; height: 32%; border-radius: 60% 70% 0 0; opacity: .64; background: #92b3a4; transition: background 1.4s; }
+.hill-left { left: -17%; transform: rotate(8deg); } .hill-right {right: -20%;height:27%;background: #a5b3a1;transform:rotate(-9deg);}
+.neighborhood {position:absolute;inset:0;z-index:2;opacity:.4;transition:opacity 1.4s;}
+.neighbor {position:absolute;bottom:17%;background:#b2aaa0;box-shadow:inset -12px 0 #7e9a9b44;border-top:8px solid #c2b6ac;}
+.neighbor-left {left:16%;width:13%;height:30%;} .neighbor-right{left:72%;width:14%;height:37%;}
+.neighbor span {position:absolute;top:20%;left:16%;width:25%;height:19%;background:#83a6aa;box-shadow:28px 0 #83a6aa,0 66px #83a6aa,28px 66px #83a6aa;}
+.street {position:absolute;z-index:3;bottom:0;left:0;width:100%;height:19%;background:linear-gradient(#b8bfaa 0%,#d6d3b8 20%,#d6c9ad 79%,#c3b599 100%);transition:background 1.5s;}
+.street::before {content:'';position:absolute;width:100%;height:2px;top:26%;background:#eee3c7aa;box-shadow:0 12px #e8dac35c;}
+.street-shadow {position:absolute;z-index:4;left:25%;bottom:11%;width:65%;height:7%;border-radius:100%;background:#57675633;filter:blur(11px);}
+.paving {position:absolute;z-index:4;left:0;bottom:6%;height:1px;width:100%;background:#ece1c5aa;transform:skewY(-3deg);}
+/* The house: a narrow Vietnamese tube house, illustrated with layered CSS */
+.house {position:absolute;z-index:9;left:32%;bottom:11.7%;height:62%;width:31%;filter:drop-shadow(14px 8px 5px #4a50402b);}
+.house-side {position:absolute;z-index:-1;top:1.3%;left:98%;width:12%;height:98%;background:linear-gradient(90deg,#caac91,#ae947f);clip-path:polygon(0 0,100% 5%,100% 98%,0 100%);border-right:4px solid #967e70;transition:background 1.4s;}
+.house-front {position:absolute;inset:0;background:var(--facade);border:5px solid #e2c7a5;border-bottom:0;box-shadow:inset -13px 0 0 #ddbfa044, inset 8px 0 0 #ffffff2b;transition:background 1.4s,border-color 1.4s;}
+.roof-trim {position:absolute;z-index:7;top:-3.5%;left:-2.5%;width:105%;height:4.7%;background:#bd7f63;border-top:6px solid #d9a282;border-bottom:4px solid #9b6558;border-radius:3px 3px 0 0;box-shadow:0 5px 8px #533b2d20;}
+.roof-terrace {position:absolute;top:-10%;left:0;width:100%;height:10%;}
+.roof-rail {position:absolute;bottom:0;left:7%;width:86%;height:42%;border-top:3px solid #5d6562;border-left:3px solid #5d6562;border-right:3px solid #5d6562;background:repeating-linear-gradient(90deg,transparent 0 19px,#697571 20px 22px);}
+.roof-planter {position:absolute;bottom:7%;width:19%;height:26%;background:#bd7a5b;border-radius:2px 2px 8px 8px;z-index:2;}
+.planter-left{left:9%;}.planter-right{right:9%;}
+.roof-planter i {position:absolute;bottom:70%;left:20%;width:25%;height:130%;border-radius:85% 0 85% 0;background:#688e67;transform:rotate(-34deg);}
+.roof-planter i:nth-child(2){left:51%;transform:rotate(36deg);height:160%;}.roof-planter i:nth-child(3){left:40%;transform:rotate(2deg);height:175%;}
+.floor {position:absolute;left:0;width:100%;border-bottom:6px solid #d3ac89;}
+.floor-three{top:0;height:31.5%;} .floor-two{top:31.5%;height:31.5%;} .floor-one{top:63%;height:37%;border:0;}
+.wall-detail {position:absolute;left:0;top:0;height:100%;width:8%;background:#dba88438;border-right:2px solid #f5e3c9;}
+.sun-shade{position:absolute;top:7%;left:15%;width:69%;height:6%;background:#d5b18f;box-shadow:0 3px 0 #ac8d78;}
+.sliding-door {position:absolute;z-index:1;top:14%;left:22%;width:54%;height:71%;border:7px solid #806e60;background:linear-gradient(125deg,#b7dbd3 0%,#8dbdb7 50%,#70aaa9 100%);box-shadow:inset 0 0 0 4px #b3a497,0 1px 0 #ffffff66;overflow:hidden;transition:background 1.5s,box-shadow 1.5s;}
+.sliding-door::before{content:'';position:absolute;z-index:2;top:0;bottom:0;left:49%;width:5px;background:#6b7472;box-shadow:0 0 0 1px #d9d0c488;}
+.window-shine {position:absolute;left:-9%;top:-15%;width:40%;height:145%;background:#ffffff56;transform:rotate(21deg);}
+.curtain {position:absolute;right:4%;top:5%;width:16%;height:86%;background:#f4e4d391;filter:blur(2px);}
+.little-window {position:absolute;left:81%;top:32%;width:11%;height:28%;border:4px solid #a88873;background:#8bb6ae;transition:background 1.5s;}
+.balcony{position:absolute;z-index:3;left:9%;bottom:-3%;width:87%;height:24%;background:linear-gradient(#c99b7e 0 20%,#ead6bb 20% 100%);border-top:4px solid #a96d57;border-bottom:5px solid #be8b70;box-shadow:2px 4px 3px #75544136;}
+.balcony-grille{position:absolute;top:-100%;left:2%;width:96%;height:100%;border:4px solid #546461;border-bottom:0;background:repeating-linear-gradient(90deg,transparent 0 20px,#546461 21px 24px);box-shadow:inset 0 9px #50636333;}
+.hanging-plant {position:absolute;z-index:5;right:8%;bottom:14%;width:9%;height:14%;background:#ae6b50;border-radius:0 0 40% 40%;}
+.hanging-plant i{position:absolute;bottom:80%;left:25%;width:23%;height:140%;background:#567f5c;border-radius:80% 0;transform:rotate(-36deg);}.hanging-plant i:nth-child(2){left:48%;transform:rotate(30deg);}.hanging-plant i:nth-child(3){left:62%;transform:rotate(65deg);}
+.flower-pot {position:absolute;z-index:5;left:12%;bottom:17%;width:11%;height:16%;background:#b77d62;clip-path:polygon(0 0,100% 0,84% 100%,16% 100%);}
+.flower-pot i{position:absolute;left:38%;bottom:70%;width:23%;height:170%;background:#588561;border-radius:80% 0;transform:rotate(-35deg);}
+.flower-pot i:nth-child(2){transform:rotate(30deg);left:60%;}.flower-pot i:nth-child(3){transform:rotate(0);left:48%;height:240%;}
+.awning{position:absolute;z-index:6;left:-1%;top:1%;width:102%;height:9%;background:linear-gradient(#d9b99e,#b58e76);box-shadow:0 7px 5px #7762514d;border-bottom:4px solid #ae7960;}
+.address {position:absolute;z-index:7;top:16%;left:8%;height:16%;aspect-ratio:1;background:#eee3cb;border:2px solid #a57d5e;border-radius:3px;display:grid;place-items:center;color:#765a48;font-size:clamp(8px,2cqw,24px);font-weight:800;}
+.porch-light{position:absolute;z-index:7;right:11%;top:21%;width:7%;height:8%;border-radius:0 0 50% 50%;background:#735d51;box-shadow:0 0 0 3px #e3c9aa;transition:box-shadow 1.5s;}
+.porch-light::after{content:'';position:absolute;top:70%;left:21%;width:58%;height:70%;background:#fff0ba;clip-path:polygon(15% 0,85% 0,100% 100%,0 100%);}
+.garage {position:absolute;left:8%;bottom:0;width:63%;height:63%;background:linear-gradient(90deg,#526969,#7b8a83 25%,#647a76 80%,#4f696b);border:7px solid #ad8c73;box-shadow:inset 0 0 0 3px #374f50;}
+.garage-slats {position:absolute;inset:4% 3%;background:repeating-linear-gradient(90deg,#274949bd 0 3px,#a6b8af63 3px 7px,transparent 7px 17px);opacity:.85;}
+.garage-handle{position:absolute;right:10%;top:49%;width:3px;height:17%;background:#d8ddd6;border-radius:3px;}
+.front-door {position:absolute;right:7%;bottom:0;width:19%;height:63%;background:linear-gradient(90deg,#bcc6cf 0%,#edf2f6 50%,#afb9c4 100%);border:5px solid #86929f;box-shadow:inset 0 0 0 3px #eaf0f4;overflow:hidden;}
+.front-door::before{content:'';position:absolute;left:50%;top:0;width:2px;height:100%;background:#7b8793;transform:translateX(-50%);box-shadow:0 0 0 1px #cfd7de;}
+.front-door::after{content:'';position:absolute;inset:8% 7%;border:2px solid #dfe6eb;box-shadow:inset 0 0 0 1px #98a4af;}
+.door-panel{position:absolute;top:10%;width:40%;height:74%;background:linear-gradient(180deg,#d8e0e7 0%,#f7fafc 46%,#c2ccd6 100%);border:2px solid #97a3af;box-shadow:inset 0 0 0 2px #edf2f6;}
+.panel-left{left:8%;}
+.panel-right{right:8%;}
+.door-panel::after{content:'';position:absolute;left:14%;top:15%;width:72%;height:48%;background:linear-gradient(180deg,#7f99a8 0%,#bfd6e2 100%);border:1px solid #dde7ee;opacity:.75;}
+.door-handle{position:absolute;top:49%;width:4px;height:18%;border-radius:4px;background:#717f8d;box-shadow:0 0 0 1px #d9e0e5;z-index:2;}
+.handle-left{left:44%;}
+.handle-right{right:44%;}
+.front-steps {position:absolute;bottom:-4%;left:3%;width:94%;height:4%;background:#c0b0a0;box-shadow:0 5px 0 #aaa096;}
+.house-foundation{position:absolute;bottom:-1.5%;left:-3%;width:109%;height:2.3%;background:#ab9b8a;z-index:3;}
+/* Cây bàng-inspired leafy street tree */
+.tree{position:absolute;z-index:12;left:67%;bottom:10.6%;height:53%;width:27%;transform-origin:50% 100%;animation:sway 8s ease-in-out infinite alternate;}
+.tree-trunk{position:absolute;left:47%;bottom:0;width:8%;height:65%;border-radius:48% 45% 9% 12%;background:linear-gradient(90deg,#745b49,#9e7856 36%,#705544);transform:rotate(3deg);box-shadow:inset 3px 0 #574b3a77;}
+.tree-trunk::after{content:'';position:absolute;left:38%;top:10%;width:10%;height:74%;background:#d2a3814d;border-radius:100%;}
+.branch{position:absolute;bottom:38%;left:50%;width:5%;height:34%;border-radius:20px;background:#80634d;transform-origin:bottom;}
+.branch-left{transform:rotate(-46deg)}.branch-right{transform:rotate(43deg);height:38%;}.branch-high{transform:rotate(-14deg);height:52%;}
+.crown-layer{position:absolute;border-radius:50%;transition:background 1.4s,box-shadow 1.4s;}
+.crown-bottom{left:17%;top:25%;width:70%;height:38%;background:var(--leaf-deep);box-shadow:-30px -3px 0 -2px var(--leaf),25px -2px 0 -6px var(--leaf);}
+.crown-middle{left:4%;top:15%;width:91%;height:37%;background:var(--leaf);box-shadow:17px -24px 0 -8px var(--leaf-light),-18px -11px 0 -8px #77a274,38px 15px 0 -7px var(--leaf-deep);}
+.crown-top{left:25%;top:3%;width:58%;height:39%;background:var(--leaf-light);box-shadow:-42px 26px 0 -12px #67996c,38px 20px 0 -10px #74a575,inset -16px -15px 0 #598d63;}
+.tree-highlight{position:absolute;z-index:2;width:18%;height:6%;border-radius:50%;background:#b6cd9270;transform:rotate(-15deg);}
+.h1{left:36%;top:16%;}.h2{left:12%;top:35%;width:12%;}
+@keyframes sway{from{transform:rotate(-.7deg)}to{transform:rotate(1.1deg)}}
+/* Small daily-life scene: day motorbike, night dog walk */
+.street-life{position:absolute;z-index:11;left:0;bottom:5.2%;width:100%;height:14%;pointer-events:none;}
+.motorbike-scene,.walk-scene{position:absolute;transition:opacity 1s ease,transform 1s ease;}
+.motorbike-scene{left:10%;bottom:-10%;width:17%;height:100%;opacity:1;animation:bike-passing 17s linear infinite;}
+.walk-scene{right:13%;bottom:20%;width:18%;height:100%;opacity:0;animation:dog-walk-passing 19s linear -7s infinite;animation-play-state:paused;}
+.motorbike-body{position:absolute;left:19%;bottom:24%;width:48%;height:17%;background:linear-gradient(90deg,#325f8a,#5a8eb5 55%,#294f72);border-radius:22px 30px 14px 10px;box-shadow:inset 0 -2px 0 #203f5f;}
+.bike-seat{position:absolute;left:29%;bottom:91%;width:28%;height:48%;background:#4e433c;border-radius:8px 8px 2px 2px;}
+.bike-front{position:absolute;right:-3%;bottom:53%;width:29%;height:34%;border-radius:0 8px 0 0;border-right:3px solid #415566;border-top:3px solid #415566;transform:skewX(-18deg);}
+.wheel{position:absolute;bottom:6%;width:18%;aspect-ratio:1;border-radius:50%;background:#31353c;box-shadow:inset 0 0 0 4px #cad1d6,inset 0 0 0 8px #4f5f68;}
+.wheel-back{left:20%;}.wheel-front{right:15%;}
+.motorbike-body::before,.motorbike-body::after{content:'';position:absolute;bottom:-46%;width:26%;height:55%;border-bottom:3px solid #42525c;}
+.motorbike-body::before{left:14%;transform:rotate(16deg);}
+.motorbike-body::after{right:14%;transform:rotate(-12deg);}
+.motorbike-rider{position:absolute;left:35%;bottom:42%;width:22%;height:41%;}
+.rider-head{position:absolute;left:27%;top:0;width:34%;aspect-ratio:1;border-radius:50%;background:#f2c59f;box-shadow:0 0 0 5px #d4d9db inset;}
+.rider-body{position:absolute;left:16%;top:32%;width:56%;height:50%;background:#8d6258;border-radius:12px 12px 8px 8px;transform:skewX(-10deg);}
+.rider-body::before{content:'';position:absolute;left:-20%;top:22%;width:35%;height:10%;background:#8d6258;transform:rotate(12deg);border-radius:8px;}
+.rider-body::after{content:'';position:absolute;right:-20%;top:34%;width:37%;height:10%;background:#8d6258;transform:rotate(-25deg);border-radius:8px;}
+@keyframes bike-passing{0%{transform:translateX(-190%)}100%{transform:translateX(605%)}}
+@keyframes dog-walk-passing{0%{transform:translateX(165%) scaleX(-1)}100%{transform:translateX(-570%) scaleX(-1)}}
+.walker{position:absolute;left:0;bottom:11%;width:22%;height:73%;}
+.walker-head{position:absolute;left:26%;top:0;width:26%;aspect-ratio:1;border-radius:50%;background:#ecc09c;}
+.walker-body{position:absolute;left:22%;top:23%;width:30%;height:35%;background:#7d8ba1;border-radius:10px 10px 6px 6px;}
+.walker-arm{position:absolute;left:44%;top:35%;width:32%;height:7%;background:#7d8ba1;transform:rotate(12deg);transform-origin:left center;border-radius:8px;}
+.walker-leg{position:absolute;top:55%;width:7%;height:28%;background:#53463f;border-radius:8px;transform-origin:top center;animation:walk-leg 1.2s ease-in-out infinite;}
+.leg-left{left:27%;}.leg-right{left:43%;animation-delay:-.6s;}
+@keyframes walk-leg{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-14deg)}}
+.leash{position:absolute;left:18%;bottom:49%;width:20%;height:2px;background:#d7c8a6;transform:rotate(8deg);transform-origin:left center;}
+.dog{position:absolute;left:43%;bottom:15%;width:28%;height:31%;background:#c39160;border-radius:45% 44% 24% 18%;animation:dog-bob 1.2s ease-in-out infinite;}
+.dog-head{position:absolute;right:-16%;top:16%;width:36%;height:49%;background:#c39160;border-radius:48% 55% 52% 50%;}
+.dog-ear{position:absolute;right:-8%;top:13%;width:13%;height:25%;background:#8b5b40;border-radius:40% 60% 20% 70%;transform:rotate(18deg);}
+.dog-tail{position:absolute;left:-8%;top:8%;width:22%;height:10%;background:#8b5b40;border-radius:20px;transform:rotate(-35deg);transform-origin:right center;animation:wag .45s ease-in-out infinite alternate;}
+.dog-leg{position:absolute;bottom:-22%;width:8%;height:27%;background:#8b5b40;border-radius:6px;animation:walk-leg 1.2s ease-in-out infinite;}
+.leg-front{left:58%;}.leg-back{left:18%;animation-delay:-.5s;}
+@keyframes wag{from{transform:rotate(-48deg)}to{transform:rotate(-20deg)}}
+@keyframes dog-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+/* Street plants and subtle small-life details */
+.front-garden{position:absolute;z-index:15;left:29%;bottom:9.7%;width:69%;height:13%;pointer-events:none;}
+.garden-bed{position:absolute;bottom:0;right:1%;width:25%;height:19%;border-radius:60% 40% 45% 55%;background:#6b805d;}
+.garden-bed i{position:absolute;bottom:42%;left:calc(12% + (var(--idx,0) * 17%));width:16%;height:90%;border-radius:90% 0;background:#609167;transform:rotate(-30deg);}
+.garden-bed i:nth-child(2){--idx:1;transform:rotate(20deg);height:130%;background:#7aa16b;}.garden-bed i:nth-child(3){--idx:2;height:110%;}.garden-bed i:nth-child(4){--idx:3;transform:rotate(28deg);height:140%;}.garden-bed i:nth-child(5){--idx:4;transform:rotate(6deg);height:98%;}
+.large-pot,.small-pot{position:absolute;bottom:0;width:5.8%;height:27%;background:linear-gradient(90deg,#af795d,#d18d6a);border-radius:1px 1px 8px 8px;box-shadow:inset 0 4px #e3a382;}
+.large-pot{left:1%;}.small-pot{left:9%;width:4.8%;height:22%;}
+.pot-leaves{position:absolute;left:36%;bottom:84%;height:175%;width:24%;border-radius:90% 0;background:#588b62;transform:rotate(-28deg);box-shadow:12px -5px 0 #86a877,-11px 2px 0 #507d54;}
+.grass{position:absolute;bottom:0;width:12%;height:15%;border-radius:70% 80% 0 0;background:#78946b66;}.grass-left{left:17%;}.grass-right{right:20%;}
+.fireflies{position:absolute;z-index:18;inset:0;opacity:0;transition:opacity 1s;pointer-events:none;}
+.fireflies i{position:absolute;left:77%;top:65%;width:.5%;aspect-ratio:1;border-radius:100%;background:#fbe9a2;box-shadow:0 0 14px 3px #f2dc88;animation:firefly 4s ease-in-out infinite alternate;}
+.fireflies i:nth-child(2){left:82%;top:75%;animation-delay:-2s}.fireflies i:nth-child(3){left:69%;top:64%;animation-delay:-1.3s}.fireflies i:nth-child(4){left:89%;top:57%;animation-delay:-3s}
+@keyframes firefly{from{opacity:.1;transform:translate(0,0)}to{opacity:1;transform:translate(12px,-18px)}}
+/* Editorial elements */
+.scene-heading{position:absolute;z-index:25;top:8.5%;left:6.2%;color:#3d6261;transition:color 1.4s;}
+.scene-heading p{margin:0 0 1.5cqw;font-size:1.05cqw;font-weight:900;letter-spacing:.28em;}
+.scene-heading h1{max-width:25cqw;font-size:clamp(15px,2.75cqw,34px);font-family:Georgia,'Times New Roman',serif;font-weight:400;line-height:1.14;letter-spacing:-.025em;margin:0 0 1.15cqw;}
+.scene-heading>span{font-size:1.08cqw;letter-spacing:.035em;opacity:.83;}
+.scene-credit{position:absolute;z-index:25;left:5%;bottom:4%;color:#6b7068;font-weight:800;letter-spacing:.19em;font-size:.84cqw;transition:color 1.4s;}
+.scene-credit span{margin:0 .8cqw;color:#bb8965;}
+.app-footer{font-size:12px;letter-spacing:.02em;text-align:center;color:#829086;margin:14px 0 0;}.app-footer span{color:#b58e77;margin-left:7px;}
+/* Six stages in the Vietnamese alley's 24-hour cycle */
+.scene[data-phase="dawn"]{--warmth-opacity:.42;--night-opacity:.11;--facade:#eed8bb;--leaf:#5c886c;}
+.scene[data-phase="morning"]{--warmth-opacity:.08;--night-opacity:0;}
+.scene[data-phase="noon"]{--warmth-opacity:0;--night-opacity:0;--facade:#f5e6c9;--leaf:#5c956e;}
+.scene[data-phase="afternoon"]{--warmth-opacity:.66;--night-opacity:.12;--facade:#eac9a9;--leaf:#5e8961;}
+.scene[data-phase="evening"]{--warmth-opacity:.19;--night-opacity:.79;--facade:#ada3a5;--facade-shade:#938489;--leaf:#3b6460;--leaf-light:#5e7c69;--leaf-deep:#2e4f52;}
+.scene[data-phase="night"]{--warmth-opacity:0;--night-opacity:1;--facade:#9799a2;--facade-shade:#717783;--leaf:#345a5a;--leaf-light:#4b7166;--leaf-deep:#254750;}
+.scene[data-phase="dawn"] .sun{left:13%;top:33%;background:#ffe4ab;}
+.scene[data-phase="noon"] .sun{left:54%;top:9%;}
+.scene[data-phase="afternoon"] .sun{left:76%;top:31%;background:#ffdfad;}
+.scene[data-phase="evening"] .sun,.scene[data-phase="night"] .sun{opacity:0;transform:translateY(70px)}
+.scene[data-phase="evening"] .moon,.scene[data-phase="night"] .moon{opacity:1;transform:translateY(0)}
+.scene[data-phase="evening"] .stars,.scene[data-phase="night"] .stars{opacity:1}
+.scene[data-phase="evening"] .cloud,.scene[data-phase="night"] .cloud{opacity:.15}
+.scene[data-phase="evening"] .distant-hill,.scene[data-phase="night"] .distant-hill{background:#334c58}
+.scene[data-phase="evening"] .neighborhood,.scene[data-phase="night"] .neighborhood{opacity:.56;filter:brightness(.46)}
+.scene[data-phase="evening"] .street,.scene[data-phase="night"] .street{background:linear-gradient(#414955 0%,#61646d 20%,#6b696d 100%)}
+.scene[data-phase="evening"] .house-front,.scene[data-phase="night"] .house-front{border-color:#777784;box-shadow:inset -12px 0 0 #252b3e20}
+.scene[data-phase="evening"] .house-side,.scene[data-phase="night"] .house-side{background:linear-gradient(90deg,#777582,#5b5e6b)}
+.scene[data-phase="evening"] .sliding-door,.scene[data-phase="night"] .sliding-door{background:linear-gradient(115deg,#fae6ad,#e1ae70 68%,#d3985a);box-shadow:inset 0 0 10px 4px #f6ce8c,0 0 12px #f3c58877}
+.scene[data-phase="evening"] .little-window,.scene[data-phase="night"] .little-window{background:#f6c77b;box-shadow:0 0 8px #f6c77b9b}
+.scene[data-phase="evening"] .porch-light,.scene[data-phase="night"] .porch-light{box-shadow:0 0 12px 7px #ffdb966e,0 0 38px 22px #ffd29c3b}
+.scene[data-phase="evening"] .scene-heading,.scene[data-phase="night"] .scene-heading{color:#f4ddc6}
+.scene[data-phase="evening"] .scene-credit,.scene[data-phase="night"] .scene-credit{color:#ddc7bc}
+.scene[data-phase="evening"] ~ .app-footer,.scene[data-phase="night"] ~ .app-footer{color:#829086}
+.scene[data-phase="evening"] .fireflies,.scene[data-phase="night"] .fireflies{opacity:1}
+.scene[data-phase="dawn"] .scene-heading,.scene[data-phase="afternoon"] .scene-heading{color:#554f53}
+/* Preserve house design; only change daily street-life actors */
+.scene[data-phase="noon"] .motorbike-scene,.scene[data-phase="evening"] .motorbike-scene,.scene[data-phase="night"] .motorbike-scene{opacity:0;animation-play-state:paused;}
+.scene[data-phase="evening"] .walk-scene{opacity:1;animation-play-state:running;}
+.scene[data-phase="night"] .walk-scene{opacity:0;animation-play-state:paused;}
+@media (max-width:650px) {
+  .village-app{padding:8px 6px;}
+  .time-topbar{padding:14px 12px;gap:10px;align-items:flex-start;flex-direction:column;margin-bottom:10px;border-radius:14px;}
+  .time-topbar h2{font-size:22px;}
+  .time-topbar-desc{font-size:12px;}
+  .time-input-wrap{width:100%;}
+  .time-input-wrap input{width:100%;min-width:0;font-size:17px;}
+  .scene{width:100%;border-radius:13px;aspect-ratio:4/4.5;}
+  .scene-heading{top:5%;left:6%;}
+  .scene-heading h1{font-size:5.2cqw;max-width:50cqw;}
+  .scene-heading p{font-size:2cqw;letter-spacing:.19em;}
+  .scene-heading>span{font-size:2cqw;}
+  .house{left:24%;width:43%;height:54%;bottom:17%;}
+  .tree{left:59%;width:37%;height:48%;bottom:18%;}
+  .street-life{bottom:14.2%;height:12%;}
+  .motorbike-scene{left:7%;bottom:-8%;width:25%;}
+  .walk-scene{right:7%;bottom:18%;width:28%;}
+  .street{height:25%;}.distant-hill{bottom:24%;}.neighbor{bottom:24%;}
+  .front-garden{left:19%;bottom:15.4%;width:75%;}
+  .sun,.moon{width:13%;left:76%;top:19%;}
+  .scene-credit{bottom:4%;font-size:1.5cqw;}
+  .app-footer{font-size:11px;max-width:310px;line-height:1.6;}
+  .app-footer span{display:block;margin:0;}
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;}
+}
